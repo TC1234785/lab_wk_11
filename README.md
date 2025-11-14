@@ -1,41 +1,33 @@
 # 4640-ansible-roles-lab
 
-
-
-## Getting started
-
-See D2L for lab instructions.
-
 ## Run the Ansible configuration
 
 Prereqs (first time only):
 
-```powershell
+```shell
 pip install boto3 botocore
-ansible-galaxy collection install amazon.aws
+```
+If pip does not work, run these commands:
+```shell 
+sudo apt install python
+sudo apt install pip
+pip install boto3 botocore
 ```
 
-Run (from repo root):
-
-```powershell
-$env:ANSIBLE_CONFIG = "ansible/ansible.cfg"
-
-# Inspect dynamic inventory from AWS EC2 plugin
-ansible-inventory -i ansible/inventory/aws_ec2.yml --graph
-
-# Sanity checks
-ansible-playbook -i ansible/inventory/aws_ec2.yml ansible/playbook.yml --syntax-check
-ansible-playbook -i ansible/inventory/aws_ec2.yml ansible/playbook.yml --list-hosts
-
-# Dry run with diffs
-ansible-playbook -i ansible/inventory/aws_ec2.yml ansible/playbook.yml --check --diff
-
-# Apply changes (optionally limit to one group first)
-ansible-playbook -i ansible/inventory/aws_ec2.yml ansible/playbook.yml --limit server_role_frontend_server -vv
-ansible-playbook -i ansible/inventory/aws_ec2.yml ansible/playbook.yml
+## Ansible Configuration
+Ensure that the name of the playbook is actually playbook. 
+If not, the run this command: 
+```shell
+cp <filename> playbook.yml
 ```
 
-Notes:
-- The dynamic groups come from EC2 tags via `ansible/inventory/aws_ec2.yml`.
-- Nginx reloads via handlers when `index.html` or `default.conf` changes.
-- Files and templates are located under roles, e.g. `ansible/roles/frontend/...`.
+Once that is complete, run the command: 
+```shell 
+ansible-playbook -i inventory/aws_ec2.yml playbook.yml
+```
+
+
+
+### Screenshot: 
+<img width="446" height="258" alt="image" src="https://github.com/user-attachments/assets/eb1b607c-1c4e-4b38-9ce4-8bf9aec02b03" />
+
