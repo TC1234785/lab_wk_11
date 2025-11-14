@@ -1,0 +1,18 @@
+---
+- name: Configure Redis Servers
+  hosts: server_role_redis_server
+  become: true
+  gather_facts: yes
+  vars:
+    ansible_user: rocky
+  roles:
+    - redis_server
+
+- name: Configure Frontend Servers
+  hosts: server_role_frontend_server
+  become: true
+  gather_facts: yes
+  vars:
+    ansible_user: ubuntu
+  roles:
+    - frontend_server
